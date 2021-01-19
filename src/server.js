@@ -7,9 +7,12 @@ app.use(express.json());
 const {initDb} = require('./initDb');
 const {userRouter} = require('./routers/user.router');
 const { productRouter } = require('./routers/products.router');
+
 if(process.env.NODE_ENV==='production'){
     app.use(express.static(path.join(__dirname,'../client/build')));
-    app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'../client/build','index.html')));
+    app.get('*',function(req,res){
+        res.sendFile(path.join(__dirname,'../client/build','index.html'))
+    });
 }
 
 app.use(cors());
